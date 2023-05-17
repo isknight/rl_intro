@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+ray_results/
 build/
 develop-eggs/
 dist/
