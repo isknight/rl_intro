@@ -41,7 +41,7 @@ def train_agent(experiment_name, environment, iterations):
         f"{Fore.LIGHTBLUE_EX}Training {Fore.RED}'{experiment_name}' {Fore.LIGHTBLUE_EX}on {Fore.RED}'{environment}' {Fore.LIGHTBLUE_EX}for {Fore.RED}{iterations} {Fore.LIGHTBLUE_EX}iterations.{Style.RESET_ALL}")
 
     def get_trial_name(results_dir):
-        return f"{experiment_name}_{results_dir}_results"
+        return f"{results_dir}_results"
 
     # Get the env based on name mapping
     env = get_env_by_name(environment)

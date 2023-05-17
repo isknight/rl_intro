@@ -29,14 +29,11 @@ from rl.utils import training_utils
 
 def experiment(config, experiment_name, iterations: int = 50):
     print(f"Running Experiment: {experiment_name} for {iterations} iterations")
-    script_path = os.path.dirname(os.path.abspath(__file__))
-
-    # checkpoints_path = os.path.join(script_path, '../../ray_results', experiment_name)
     checkpoints_path = config_utils.get_path(f"ray_results/{experiment_name}")
     # delete the checkpoints/experiments
     training_utils.delete_checkpoint_folders(checkpoints_path)
+
     #TODO resume the checkpoints/experiments
-    print(f"checkpoints_path={checkpoints_path}")
 
     algo = ppo.PPO(config=config, env="shroom_collector_env")
 

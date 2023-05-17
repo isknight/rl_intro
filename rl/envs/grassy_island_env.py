@@ -67,5 +67,5 @@ class GrassyIslandEnv(gym.Env, ABC):
         collector_vision[:, :, 1] = env_utils.extract_collector_vision(self.game.mushroom_layer, x, y, Constants.COLLECTOR_VISION_BOX)
         vision = env_utils.extract_collector_vision(self.game.mushroom_layer, x, y, Constants.COLLECTOR_VISION_BOX)
         return {
-
+            "collector_vision": vision
                }

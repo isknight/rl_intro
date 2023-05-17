@@ -7,6 +7,13 @@ Prerequisites:
 Python 3.9.13
 ```
 
+If you are using pyenv (a great way to manage python versions on your machine)
+
+```bash
+pyenv install 3.9.13
+pyenv global 3.9.13
+```
+
 then pip install requirements.txt.
 
 To test if everything is running, from the top level folder run:
@@ -20,7 +27,7 @@ This should pop up a human playable version of the first level we'll solve. Move
 
 ## What is reinforcement learning?
 
-
+### TODO :) 
 
 ## The Problem
 
@@ -31,4 +38,18 @@ For the purpose of this intro lab, solve the following by training a policy
 
 ### grassy_island_env
 
-Our peaceful
+Our intrepid shroom collector needs to gather mushrooms for battle!
+
+Every move made costs, an energy, each mushroom gathered gains 50 energy-- the objective is to gather 5 mushrooms.
+
+What observational_space & rewards can help train our AI to consistently win this game?
+
+
+### eruption_env
+
+Oh no! the island has erupted spewing lava! If our brave shroom collector steps in the lava, he will die!
+
+On top of that he needs to collect 10 shrooms now. 
+
+What observational_space and rewards can help train our AI to consistently win this game?
+
