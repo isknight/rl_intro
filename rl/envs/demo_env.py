@@ -1,4 +1,5 @@
 import gym
+from typing import Dict, Any
 import numpy as np
 from gym import spaces
 from rl.games.shroom_collector_game import ShroomCollectorGame, Constants
@@ -6,8 +7,9 @@ from ray.rllib.env.env_context import EnvContext
 from rl.utils import env_utils
 from rl.utils import level_util
 
+
 class DemoEnv(gym.Env):
-    def __init__(self, config: EnvContext, render=False):
+    def __init__(self, render=False):
 
         # Action space: 0 = up, 1 = right, 2 = down, 3 = left
         self.action_space: spaces.Discrete = spaces.Discrete(4)
@@ -22,11 +24,11 @@ class DemoEnv(gym.Env):
         self.game: ShroomCollectorGame = level_util.get_demo(self.render)
         self.reset()
 
-    def reset(self):
+    def reset(self) -> Dict[str, Any]:
         self.game.reset()
         return self._get_observation()
 
-    def step(self, action):
+    def step(self, action) -> tuple[Dict[str, Any], float, bool, dict]:
 
         reward = 0
         available_actions = self.game.get_available_action()
@@ -57,7 +59,7 @@ class DemoEnv(gym.Env):
 
         return self._get_observation(), reward, done, {}
 
-    def _get_observation(self):
+    def _get_observation(self) -> Dict[str, Any]:
 
         layers = np.zeros((20, 20, 2), dtype=int)
         layers[:, :, 0] = self.game.terrain_layer.copy()
@@ -72,8 +74,3 @@ class DemoEnv(gym.Env):
         return {
                 "collector_vision": vision,
                }
-
-    def _calculate_reward(self, old_position, new_position):
-        # Define your reward calculation logic here
-        reward = 0
-        return reward

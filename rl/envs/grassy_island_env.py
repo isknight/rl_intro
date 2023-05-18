@@ -1,5 +1,5 @@
 from abc import ABC
-
+from typing import Dict, Any
 import gym
 from gym import spaces
 from ray.rllib.env.env_context import EnvContext
@@ -10,7 +10,7 @@ from rl.utils import level_util
 
 class GrassyIslandEnv(gym.Env, ABC):
 
-    def __init__(self, config: EnvContext, render=False):
+    def __init__(self, render=False):
         # Action space: 0 = up, 1 = right, 2 = down, 3 = left
         self.action_space: spaces.Discrete = spaces.Discrete(4)
 
@@ -27,11 +27,11 @@ class GrassyIslandEnv(gym.Env, ABC):
         self.game: ShroomCollectorGame = level_util.get_grassy_island(ui_enabled=self.render)
         self.reset()
 
-    def reset(self) -> None:
+    def reset(self) -> Dict[str, Any]:
         self.game.reset()
         return self._get_observation()
 
-    def step(self, action):
+    def step(self, action) -> tuple[Dict[str, Any], float, bool, dict]:
         available_actions = self.game.get_available_action()
         if action in available_actions:
             self.game.step(action)
@@ -43,7 +43,7 @@ class GrassyIslandEnv(gym.Env, ABC):
 
         return self._get_observation(), reward, done, {}
 
-    def _get_observation(self):
+    def _get_observation(self) -> Dict[str, Any]:
 
         # TODO - What observational space should we have?
         return {

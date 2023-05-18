@@ -168,7 +168,6 @@ class ShroomCollectorGame:
         if len(mushroom_spots) > 0:
             random_spot = random.choice(mushroom_spots)
             self._place_a_shroom(x=random_spot[0], y=random_spot[1])
-            # self.mushroom_layer[random_spot[0]][random_spot[1]] = Constants.TILE_ONE_HOT[Constants.MUSHROOM_COLOR]
 
     def draw_terrain(self):
         for y in range(Constants.TILES_Y):
@@ -245,8 +244,6 @@ class ShroomCollectorGame:
             if self.terrain_layer[x_prev][y_prev] == Constants.TILE_ONE_HOT[Constants.SAND_COLOR]:
                 self.terrain_layer[x_prev][y_prev] = Constants.TILE_ONE_HOT[Constants.LAVA_COLOR]
 
-        # self.mushroom_layer[prev[0], prev[1]] = 0
-        # self.mushroom_layer[curr[0], curr[1]] = ShroomCollectorConstants.
     def _apply_action(self, action: int):
         self.prev_character_position = self.character_position.copy()
         self.energy -= 1
@@ -275,7 +272,6 @@ class ShroomCollectorGame:
             self.game_over_reason = Constants.REASON_SHROOMS_COLLECTED
 
         return self.done, self.game_over_reason
-
 
     def step(self, action: int = None):
         if action is not None and not self.done:

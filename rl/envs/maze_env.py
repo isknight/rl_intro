@@ -1,5 +1,5 @@
 from abc import ABC
-
+from typing import Dict, Any
 import gym
 import numpy as np
 from gym import spaces
@@ -11,7 +11,7 @@ from rl.utils import level_util
 
 class MazeEnv(gym.Env, ABC):
 
-    def __init__(self, config: EnvContext, render=False):
+    def __init__(self, render=False):
 
         # Action space: 0 = up, 1 = right, 2 = down, 3 = left
         self.action_space: spaces.Discrete = spaces.Discrete(4)
@@ -30,11 +30,11 @@ class MazeEnv(gym.Env, ABC):
 
         self.reset()
 
-    def reset(self) -> None:
+    def reset(self) -> Dict[str, Any]:
         self.game.reset()
         return self._get_observation()
 
-    def step(self, action):
+    def step(self, action) -> tuple[Dict[str, Any], float, bool, dict]:
         available_actions = self.game.get_available_action()
         if action in available_actions:
             self.game.step(action)
@@ -46,7 +46,7 @@ class MazeEnv(gym.Env, ABC):
 
         return self._get_observation(), reward, done, {}
 
-    def _get_observation(self):
+    def _get_observation(self) -> Dict[str, Any]:
         return {
                 "place_holder": 1,
                }

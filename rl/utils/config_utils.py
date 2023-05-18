@@ -25,7 +25,6 @@ def get_config():
         "custom_model_config": {},
         "custom_preprocessor": None,
     }
-    config["model"]["conv_activation"] = "relu"
     config["model"]["post_fcnet_hiddens"] = [128, 128]
     config["model"]["post_fcnet_activation"] = "relu"
 

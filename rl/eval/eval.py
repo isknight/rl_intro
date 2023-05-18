@@ -10,7 +10,6 @@ from pygame.locals import *
 
 from rl.utils import training_utils, config_utils
 
-
 def fxn():
     warnings.warn("deprecated", DeprecationWarning)
 
@@ -53,28 +52,6 @@ if __name__ == "__main__":
     # ray.init(accelerator_type="TITAN")
     register_env("shroom_collector_env", ShroomCollectorEnv)
 
-
-    # config = ppo.PPOConfig().environment("shroom_collector_env")
-    # config = config.to_dict()
-    #
-    # # config["train-iterations"] = train_iterations
-    # config["num_cpus_per_worker"] = 1.0
-    # config["num_workers"] = 0
-    # config["num_gpus"] = 0
-    # config["model"] = {
-    #     "custom_model": None,
-    #     "custom_model_config": {},
-    #     "custom_preprocessor": None,
-    #     "conv_filters": [
-    #         [32, [Constants.COLLECTOR_VISION_BOX, Constants.COLLECTOR_VISION_BOX], 1],  # 32 filters, 3x3 kernel size, stride 1
-    #     ]
-    #     # 20
-    #     # "conv_filters": [
-    #     #     [16, [3, 3], 2],  # 16 filters, 3x3 kernel size, stride 2
-    #     #     [32, [3, 3], 2],  # 32 filters, 3x3 kernel size, stride 2
-    #     #     [64, [4, 4], 2],  # 64 filters, 4x4 kernel size, stride 2
-    #     # ],
-    # }
     config = config_utils.get_config()
 
     algo = ppo.PPO(config=config, env="shroom_collector_env")

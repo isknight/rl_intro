@@ -35,5 +35,6 @@ def get_eruption(ui_enabled=True):
                                random_shroom_count=10,
                                respawn_mushrooms=True,
                                sand_to_lava=False,
-                               map_file_name="eruption_map.png")
+                               map_file_name="eruption_map.png",
+                               shroom_count_goal=10)
     return game

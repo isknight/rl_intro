@@ -1,8 +1,9 @@
 from abc import ABC
-
+from typing import Dict, Any
 import gym
 import numpy as np
 from gym import spaces
+from gym.core import ObsType
 from ray.rllib.env.env_context import EnvContext
 
 from rl.games.shroom_collector_game import ShroomCollectorGame, Constants
@@ -30,11 +31,11 @@ class EruptionEnv(gym.Env, ABC):
 
         self.reset()
 
-    def reset(self):
+    def reset(self) -> Dict[str, Any]:
         self.game.reset()
         return self._get_observation()
 
-    def step(self, action):
+    def step(self, action) -> tuple[Dict[str, Any], float, bool, dict]:
         available_actions = self.game.get_available_action()
         before_shroom_count = self.game.shrooms_collected
         if action in available_actions:
@@ -47,7 +48,7 @@ class EruptionEnv(gym.Env, ABC):
 
         return self._get_observation(), reward, done, {}
 
-    def _get_observation(self):
+    def _get_observation(self) -> Dict[str, Any]:
         return {
                     "place_holder": 1
                }
