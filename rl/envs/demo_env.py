@@ -55,8 +55,6 @@ class DemoEnv(gym.Env):
         elif self.game.shrooms_collected > before_shroom_count:
             # We know we collected a shroom.
             reward = 1.0
-        else:
-            reward = -0.005
 
         return self._get_observation(), reward, done, {}
 
