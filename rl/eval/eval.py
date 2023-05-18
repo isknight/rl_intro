@@ -20,7 +20,6 @@ with warnings.catch_warnings():
 
 import ray.rllib.algorithms.ppo as ppo
 from ray.tune.registry import register_env
-from rl.envs.shroom_collector_env import ShroomCollectorEnv
 
 
 def manual_eval(eval_algo, env_type):

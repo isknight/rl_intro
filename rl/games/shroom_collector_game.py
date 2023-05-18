@@ -4,8 +4,6 @@ import os
 from pygame.locals import *
 import numpy as np
 import random
-import time
-
 
 class Constants:
     TILES_X, TILES_Y = 20, 20
@@ -54,9 +52,11 @@ class ShroomCollectorGame:
                  positional_shrooms=[],
                  respawn_mushrooms=True,
                  sand_to_lava=False,
-                 map_file_name="grassy_island_map.png"):
+                 map_file_name="grassy_island_map.png",
+                 shroom_count_goal: int = 5):
         # Initialize Pygame
         self.ui_enabled: bool = ui_enabled
+        self.shroom_count_goal = shroom_count_goal
         self.loaded_assets = False
         self.map_file_name = map_file_name
         self.sand_to_lava = sand_to_lava
@@ -108,8 +108,6 @@ class ShroomCollectorGame:
                     return [x, y]
         print(f"Unable to find shroom collector pixel")
         sys.exit(1)
-
-
 
     def reset(self) -> None:
         self.terrain_layer = np.zeros(Constants.TILE_SIZE)
@@ -220,12 +218,9 @@ class ShroomCollectorGame:
         return available_actions
 
     def get_surface_under_character(self):
-        # if self.character_position != self.prev_character_position:
         x = self.character_position[0]
         y = self.character_position[1]
         return self.terrain_layer[x][y]
-        # else:
-        #     return 0
 
     def _update_character_position(self, curr, prev):
         x_curr = curr[0]
@@ -275,13 +270,11 @@ class ShroomCollectorGame:
             self.done = True
             self.game_over_reason = Constants.REASON_ENERGY
 
-        if self.shrooms_collected >= Constants.SHROOM_GOAL:
+        if self.shrooms_collected >= self.shroom_count_goal:
             self.done = True
             self.game_over_reason = Constants.REASON_SHROOMS_COLLECTED
 
-
         return self.done, self.game_over_reason
-
 
 
     def step(self, action: int = None):
@@ -296,7 +289,7 @@ class ShroomCollectorGame:
         self.draw_shrooms()
         self.draw_character()
         pygame.display.set_caption(
-            f"Shroom Collector --- {self.shrooms_collected} / 5 Shrooms --- Energy: {self.energy}")
+            f"Shroom Collector --- {self.shrooms_collected} / {self.shroom_count_goal} Shrooms --- Energy: {self.energy}")
 
 
 def main():

@@ -3,7 +3,6 @@ import warnings
 from ray.tune.logger import DEFAULT_LOGGERS
 # from ray.air.integrations.wandb import WandbLoggerCallback
 # from artist.utils.custom_wandb import WandbLoggerCallback
-from rl.envs.shroom_collector_env import ShroomCollectorEnv
 from rl.games.shroom_collector_game import Constants
 from rl.utils import config_utils
 
@@ -30,8 +29,6 @@ from rl.utils import training_utils
 def experiment(config, experiment_name, iterations: int = 50):
     print(f"Running Experiment: {experiment_name} for {iterations} iterations")
     checkpoints_path = config_utils.get_path(f"ray_results/{experiment_name}")
-    # delete the checkpoints/experiments
-    training_utils.delete_checkpoint_folders(checkpoints_path)
 
     #TODO resume the checkpoints/experiments
 

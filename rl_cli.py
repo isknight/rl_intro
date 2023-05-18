@@ -16,6 +16,7 @@ from rl.envs.eruption_env import EruptionEnv
 # from ray.air.integrations.wandb import WandbLoggerCallback
 # from artist.utils.custom_wandb import WandbLoggerCallback
 from rl.envs.grassy_island_env import GrassyIslandEnv
+from rl.envs.demo_env import DemoEnv
 from rl.envs.maze_env import MazeEnv
 from rl.eval.eval import manual_eval
 from rl.games.shroom_collector_game import Constants
@@ -31,6 +32,8 @@ def get_env_by_name(name: str) -> Type[gym.Env]:
         return MazeEnv
     elif name == "eruption_env":
         return EruptionEnv
+    elif name == "demo_env":
+        return DemoEnv
 
     return None
 
@@ -50,13 +53,15 @@ def train_agent(experiment_name, environment, iterations):
         print(f"Env name {env} does not map to an existing env.")
         sys.exit(0)
 
-    # Registering env
+    checkpoints_path = config_utils.get_path(f"ray_results/{experiment_name}")
+    # delete the checkpoints/experiments as we're overwrite only
+    training_utils.delete_checkpoint_folders(checkpoints_path)
+
     register_env("shroom_collector_env", env)
 
-    # Get the configuration
     config = config_utils.get_config()
 
-    # Launch a tuner manually.
+    # Launch a tuner very manually.
     logdir = config_utils.get_path(f"ray_results/{experiment_name}")
     print(f"Logging to: {logdir}")
     tune.run(
@@ -72,6 +77,7 @@ def train_agent(experiment_name, environment, iterations):
         stop={"training_iteration": 100},
         local_dir=logdir,
         trial_name_creator=get_trial_name,
+        # TODO future get this working, overwrite is fine for now.
         # resume="AUTO"
     )
 

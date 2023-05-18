@@ -48,20 +48,7 @@ class EruptionEnv(gym.Env, ABC):
         return self._get_observation(), reward, done, {}
 
     def _get_observation(self):
-        layers = np.zeros((20, 20, 2), dtype=int)
-        layers[:, :, 0] = self.game.terrain_layer.copy()
-        layers[:, :, 1] = self.game.mushroom_layer.copy()
-
-        collector_vision = np.zeros((Constants.COLLECTOR_VISION_BOX, Constants.COLLECTOR_VISION_BOX, 2), dtype=int)
-        x = self.game.character_position[0]
-        y = self.game.character_position[1]
-
-        collector_shroom_vision = np.zeros((Constants.COLLECTOR_VISION_BOX, Constants.COLLECTOR_VISION_BOX, 2), dtype=int)
-        # collector_vision[:, :, 1] = env_utils.extract_collector_vision(self.game.mushroom_layer, x, y, Constants.COLLECTOR_VISION_BOX)
-        vision = env_utils.extract_collector_vision(self.game.terrain_layer, x, y, Constants.COLLECTOR_VISION_BOX)
-        shroom_vision = env_utils.extract_collector_vision(self.game.mushroom_layer, x, y, Constants.COLLECTOR_VISION_BOX)
-
         return {
-                "collector_vision": vision,
-                "collector_shroom_vision": shroom_vision,
+                    "place_holder": 1
                }
+

@@ -1,6 +1,18 @@
 from rl.games.shroom_collector_game import ShroomCollectorGame
 
 
+def get_demo(ui_enabled=True):
+    positional_shrooms = []
+    for i in range(19):
+        positional_shrooms.append([i + 1, 10])
+    game = ShroomCollectorGame(ui_enabled=ui_enabled,
+                               positional_shrooms=positional_shrooms,
+                               respawn_mushrooms=False,
+                               map_file_name="demo_map.png",
+                               shroom_count_goal=19)
+    return game
+
+
 def get_grassy_island(ui_enabled=True):
     game = ShroomCollectorGame(ui_enabled=ui_enabled,
                                random_shroom_count=5,

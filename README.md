@@ -1,6 +1,5 @@
 # So you want to make AI bots? A gentle intro into reinforcement learning.
 
-
 Prerequisites:
 
 ```text
