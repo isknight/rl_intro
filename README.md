@@ -45,7 +45,7 @@ What **observational_space** & **rewards** can help train our AI to consistently
 
 Once you have an observational space and reward you're happy with you can train with:
 ```bash
-python rl_intro.py train --experiment_name=grassy_island --env=grassy_island_env --iterations=20
+python rl_cli.py train --experiment_name=grassy_island --env=grassy_island_env --iterations=20
 ```
 Note, experiment_name can be anything. It's just the folder your policy checkpoints / logs /metrics are stored.
 Watch the reward metrics. Are the rewards trending up?
@@ -55,7 +55,7 @@ Watch the episode_len_mean. Is it trending down?
 If you want to see your agent play:
 
 ```bash 
-rl_intro.py eval --experiment_name=grassy_island --env=grassy_island_env
+rl_cli.py eval --experiment_name=grassy_island --env=grassy_island_env
 ```
 Note, experiment_name can be anything. It's just the folder your policy checkpoints / logs /metrics are stored.
 
