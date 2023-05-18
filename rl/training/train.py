@@ -1,17 +1,6 @@
-"""Example of a custom experiment wrapped around an RLlib Algorithm."""
-import warnings
-
 # from ray.air.integrations.wandb import WandbLoggerCallback
 # from artist.utils.custom_wandb import WandbLoggerCallback
 from rl.utils import config_utils
-
-
-def fxn():
-    warnings.warn("deprecated", DeprecationWarning)
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    fxn()
 
 from ray import tune
 import ray.rllib.algorithms.ppo as ppo
@@ -31,7 +20,7 @@ def experiment(config, experiment_name, iterations: int = 50) -> None:
 
         tune.report(**train_results)
 
-        # save checkpoint every 5 iterations
+        # save checkpoint every N iterations... I guess 1 for now!
         if i % 1 == 0:
             checkpoint = algo.save(checkpoints_path)
     algo.stop()

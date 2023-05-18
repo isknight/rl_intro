@@ -1,8 +1,8 @@
 """Example of a custom experiment wrapped around an RLlib Algorithm."""
 import os
 import sys
-import warnings
-
+from typing import Type
+import gym
 import pygame
 # from ray.air.integrations.wandb import WandbLoggerCallback
 # from artist.utils.custom_wandb import WandbLoggerCallback
@@ -10,21 +10,14 @@ from pygame.locals import *
 
 from rl.utils import training_utils, config_utils
 
-def fxn():
-    warnings.warn("deprecated", DeprecationWarning)
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    fxn()
-
 import ray.rllib.algorithms.ppo as ppo
 from ray.tune.registry import register_env
 
 
-def manual_eval(eval_algo, env_type):
+def manual_eval(eval_algo: str, env_type: Type[gym.Env]) -> None:
     pygame.init()
     clock = pygame.time.Clock()
-    env = env_type(config=None, render=True)
+    env = env_type(render=True)
 
     obs = env.reset()
     env.game.render()
@@ -46,19 +39,3 @@ def manual_eval(eval_algo, env_type):
         obs = env.reset()
         is_done = False
 
-
-if __name__ == "__main__":
-    runtime_env = {"PYTHONWARNINGS": "ignore"}
-    # ray.init(accelerator_type="TITAN")
-    register_env("shroom_collector_env", ShroomCollectorEnv)
-
-    config = config_utils.get_config()
-
-    algo = ppo.PPO(config=config, env="shroom_collector_env")
-    script_path = os.path.dirname(os.path.abspath(__file__))
-    load_path = os.path.join(script_path, '../../ray_results', 'test')
-    checkpoint_path = training_utils.find_latest_checkpoint(load_path)
-    print(checkpoint_path)
-    algo.load_checkpoint(os.path.join(load_path, checkpoint_path))
-    # # print(algo)
-    manual_eval(algo)

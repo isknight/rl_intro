@@ -18,6 +18,7 @@ class DemoEnv(gym.Env):
         self.observation_space = spaces.Dict(
             {
                 "collector_vision": spaces.Box(low=-1, high=6, shape=(vision_size, vision_size), dtype=int),
+                "energy": spaces.Box(low=0, high=2000, shape=(1,), dtype=int)
             }
         )
         self.render: bool = render
@@ -73,4 +74,5 @@ class DemoEnv(gym.Env):
         vision = env_utils.extract_collector_vision(self.game.mushroom_layer, x, y, Constants.COLLECTOR_VISION_BOX)
         return {
                 "collector_vision": vision,
+                "energy": np.array([self.game.energy])
                }

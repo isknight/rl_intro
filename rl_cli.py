@@ -2,7 +2,7 @@ import os
 import string
 import sys
 from typing import Type
-
+import warnings
 import click
 import gym
 import pygame
@@ -24,6 +24,13 @@ from rl.training.train import experiment
 from rl.utils import config_utils
 from rl.utils import training_utils
 
+def fxn():
+    warnings.warn("deprecated", DeprecationWarning)
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    fxn()
+
 
 def get_env_by_name(name: str) -> Type[gym.Env]:
     if name == "grassy_island_env":
@@ -35,10 +42,10 @@ def get_env_by_name(name: str) -> Type[gym.Env]:
     elif name == "demo_env":
         return DemoEnv
 
-    return None
+    print("Name doesn't match any existing env.")
+    sys.exit(1)
 
 
-# Dummy function that represents your actual RL training function
 def train_agent(experiment_name, environment, iterations):
     print(
         f"{Fore.LIGHTBLUE_EX}Training {Fore.RED}'{experiment_name}' {Fore.LIGHTBLUE_EX}on {Fore.RED}'{environment}' {Fore.LIGHTBLUE_EX}for {Fore.RED}{iterations} {Fore.LIGHTBLUE_EX}iterations.{Style.RESET_ALL}")
@@ -82,7 +89,6 @@ def train_agent(experiment_name, environment, iterations):
     )
 
 
-# Dummy function that represents your actual RL evaluation function
 def eval_agent(experiment_name, environment):
     print(f"Evaluating agent '{experiment_name}' on '{environment}'.")
     env = get_env_by_name(environment)
@@ -103,7 +109,7 @@ def eval_agent(experiment_name, environment):
 
 def play_game(environment: string) -> None:
     env_type = get_env_by_name(environment)
-    env = env_type(config=None, render=True)
+    env = env_type(render=True)
     # game = level_util.get_grassy_island(ui_enabled=True)
     game = env.game
     clock = pygame.time.Clock()
