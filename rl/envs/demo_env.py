@@ -56,6 +56,8 @@ class DemoEnv(gym.Env):
             # We know we collected a shroom.
             reward = 1.0
 
+        reward -= 0.0005
+
         return self._get_observation(), reward, done, {}
 
     def _get_observation(self) -> Dict[str, Any]:

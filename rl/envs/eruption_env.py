@@ -13,7 +13,7 @@ from rl.utils import level_util
 
 class EruptionEnv(gym.Env, ABC):
 
-    def __init__(self, config: EnvContext, render=False):
+    def __init__(self, render=False):
         # Action space: 0 = up, 1 = right, 2 = down, 3 = left
         self.action_space: spaces.Discrete = spaces.Discrete(4)
 
