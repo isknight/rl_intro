@@ -49,6 +49,7 @@ class EruptionEnv(gym.Env, ABC):
         return self._get_observation(), reward, done, {}
 
     def _get_observation(self) -> Dict[str, Any]:
+        #TODO Don't forget to setup your observation here!
         return {
                     "place_holder": 1
                }

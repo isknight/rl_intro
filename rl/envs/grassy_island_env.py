@@ -14,9 +14,6 @@ class GrassyIslandEnv(gym.Env, ABC):
         # Action space: 0 = up, 1 = right, 2 = down, 3 = left
         self.action_space: spaces.Discrete = spaces.Discrete(4)
 
-        # A way to get vision sizes around the shroom collector
-        # vision_size = Constants.COLLECTOR_VISION_BOX
-
         # TODO question: What observational space schema do we need?
         self.observation_space = spaces.Dict(
             {

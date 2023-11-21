@@ -31,3 +31,9 @@ def extract_collector_vision(layer, x, y, subarray_size):
         layer[layer_start_x:layer_end_x, layer_start_y:layer_end_y]
 
     return subarray
+
+
+# Basic normalizer - does no safety checks
+def normalize_value(value, min_value, max_value) -> float:
+    normalized = (value - min_value) / (max_value - min_value)
+    return normalized
