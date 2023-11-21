@@ -63,7 +63,7 @@ For each of these you can look at [demo_env.py](rl/envs/demo_env.py) for startin
 
 ### grassy_island_env
 
-[demo_env.py](rl/envs/grassy_island_env.py)
+[grassy_island_env.py](rl/envs/grassy_island_env.py)
 
 Our intrepid shroom collector needs to gather mushrooms for battle!
 
@@ -88,7 +88,7 @@ If you have a good observation_space defined, and a good strategy with rewards y
 If you want to see your agent play:
 
 ```bash 
-rl_cli.py eval --experiment_name=grassy_island_env --env=grassy_island_env
+python rl_cli.py eval --experiment_name=grassy_island_env --env=grassy_island_env
 ```
 Note, experiment_name can be anything. It's just the folder your policy checkpoints / logs /metrics are stored.
 
