@@ -64,7 +64,7 @@ For each of these you can look at [demo_env.py](rl/envs/demo_env.py) for startin
 ### grassy_island_env
 
 [grassy_island_env.py](rl/envs/grassy_island_env.py)
-
+![alt text](assets/grassy_island_env.png)
 Our intrepid shroom collector needs to gather mushrooms for battle!
 
 Every move made costs energy, mushrooms spawn randomly, each mushroom gathered gains 50 energy-- the objective is to gather 5 mushrooms for battle.
@@ -96,6 +96,8 @@ It will be found under a folder `ray_results` in the root of the project after t
 
 ### eruption_env
 
+[eruption_env.py](rl/envs/eruption_env.py)
+![alt text](assets/eruption_env.png)
 Oh no! the island has erupted spewing lava! If our brave shroom collector steps in the lava, he will die!
 
 On top of that he needs to collect 10 shrooms now since he needs to save up until the lava subsides.
